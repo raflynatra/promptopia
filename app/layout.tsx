@@ -1,3 +1,5 @@
+import Nav from "@/components/Nav";
+import Provider from "@/components/Provider";
 import "@/styles/global.css";
 import { FC, ReactNode } from "react";
 
@@ -10,11 +12,16 @@ const RootLayout: FC<{ children: ReactNode }> = ({ children }) => {
   return (
     <html lang="en">
       <body>
-        <div className="main">
-          <div className="gradient" />
-        </div>
+        <Provider session={""}>
+          <div className="main">
+            <div className="gradient" />
+          </div>
 
-        <main className="app">{children}</main>
+          <main className="app">
+            <Nav />
+            {children}
+          </main>
+        </Provider>
       </body>
     </html>
   );
