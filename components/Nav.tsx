@@ -7,7 +7,6 @@ import { useState, useEffect } from "react";
 import { signIn, signOut, useSession, getProviders } from "next-auth/react";
 
 const Nav = () => {
-  // const isUserLoggedIn = true;
   const { data: session } = useSession();
 
   const [providers, setProviders] = useState<any>(null);
@@ -41,7 +40,7 @@ const Nav = () => {
         {session?.user ? (
           <div className="flex gap-3 md:gap-5">
             <Link href="create-prompt" className="black_btn">
-              Create Post
+              Create Prompt
             </Link>
 
             <button
