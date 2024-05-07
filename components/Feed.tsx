@@ -12,6 +12,7 @@ interface PromptCardListProps {
       image: string;
       username: string;
       email: string;
+      _id: string;
     };
   }[];
   handleTagClick: () => void;

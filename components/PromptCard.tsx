@@ -1,6 +1,8 @@
 "use client";
 
+import { useSession } from "next-auth/react";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import { FC, useState } from "react";
 
 interface PromptCardProps {
@@ -12,6 +14,7 @@ interface PromptCardProps {
       image: string;
       username: string;
       email: string;
+      _id: string;
     };
   };
   handleTagClick?: (tag: string) => void;
@@ -26,6 +29,8 @@ const PromptCard: FC<PromptCardProps> = ({
   handleDelete,
 }) => {
   const [copied, setCopied] = useState("");
+  const { data: session } = useSession();
+  const pathname = usePathname();
 
   const handleCopy = () => {
     setCopied(prompt.prompt);
@@ -76,6 +81,23 @@ const PromptCard: FC<PromptCardProps> = ({
       >
         {prompt.tag}
       </p>
+
+      {session?.user?.id === prompt.creator._id && pathname === "/profile" ? (
+        <div className="mt-5 flex-center gap-4 border-t border-gray-100 pt-3">
+          <p
+            className="font-inter text-sm green_gradient cursor-pointer"
+            onClick={handleEdit}
+          >
+            Edit
+          </p>
+          <p
+            className="font-inter text-sm orange_gradient cursor-pointer"
+            onClick={handleDelete}
+          >
+            Delete
+          </p>
+        </div>
+      ) : null}
     </div>
   );
 };
