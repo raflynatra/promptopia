@@ -1,22 +1,13 @@
 import React, { FC } from "react";
 import PromptCard from "./PromptCard";
+import { TPrompt } from "@/types/type";
 
 interface ProfileProps {
   name: string;
   desc: string;
-  data: {
-    _id: string;
-    prompt: string;
-    tag: string;
-    creator: {
-      image: string;
-      username: string;
-      email: string;
-      _id: string;
-    };
-  }[];
-  handleEdit: () => void;
-  handleDelete: () => void;
+  data: TPrompt[];
+  handleEdit: (prompt: TPrompt) => void;
+  handleDelete: (prompt: TPrompt) => void;
 }
 
 const Profile: FC<ProfileProps> = ({

@@ -1,19 +1,19 @@
-import { TPost } from "@/app/create-prompt/page";
 import Link from "next/link";
-import { Dispatch, FC, FormEvent, SetStateAction } from "react";
+import { ChangeEvent, Dispatch, FC, SetStateAction } from "react";
+import { TPrompt } from "@/types/type";
 
 interface FormProps {
   type: string;
-  post: TPost;
-  setPost: Dispatch<SetStateAction<TPost>>;
+  prompt: Partial<TPrompt>;
+  setPrompt: Dispatch<SetStateAction<Partial<TPrompt>>>;
   submitting: boolean;
-  handleSubmit: (e: FormEvent) => void;
+  handleSubmit: (e: ChangeEvent<HTMLFormElement>) => void;
 }
 
 const Form: FC<FormProps> = ({
   type,
-  post,
-  setPost,
+  prompt,
+  setPrompt,
   submitting,
   handleSubmit,
 }) => {
@@ -36,8 +36,8 @@ const Form: FC<FormProps> = ({
             Your AI Prompt
           </span>
           <textarea
-            value={post.prompt}
-            onChange={(e) => setPost({ ...post, prompt: e.target.value })}
+            value={prompt?.prompt}
+            onChange={(e) => setPrompt({ ...prompt, prompt: e.target.value })}
             placeholder="Write your prompt here..."
             required
             className="form_textarea"
@@ -53,8 +53,8 @@ const Form: FC<FormProps> = ({
           </span>
 
           <input
-            value={post.tag}
-            onChange={(e) => setPost({ ...post, tag: e.target.value })}
+            value={prompt?.tag}
+            onChange={(e) => setPrompt({ ...prompt, tag: e.target.value })}
             placeholder="#tag"
             required
             className="form_input"

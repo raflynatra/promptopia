@@ -1,25 +1,16 @@
 "use client";
 
+import { TPrompt } from "@/types/type";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { FC, useState } from "react";
 
 interface PromptCardProps {
-  prompt: {
-    _id: string;
-    prompt: string;
-    tag: string;
-    creator: {
-      image: string;
-      username: string;
-      email: string;
-      _id: string;
-    };
-  };
+  prompt: TPrompt;
   handleTagClick?: (tag: string) => void;
-  handleEdit?: () => void;
-  handleDelete?: () => void;
+  handleEdit?: (prompt: TPrompt) => void;
+  handleDelete?: (prompt: TPrompt) => void;
 }
 
 const PromptCard: FC<PromptCardProps> = ({
@@ -79,20 +70,24 @@ const PromptCard: FC<PromptCardProps> = ({
         className="font-inter text-sm blue_gradient cursor-pointer"
         onClick={() => handleTagClick && handleTagClick(prompt.tag)}
       >
-        {prompt.tag}
+        #{prompt.tag}
       </p>
 
       {session?.user?.id === prompt.creator._id && pathname === "/profile" ? (
         <div className="mt-5 flex-center gap-4 border-t border-gray-100 pt-3">
           <p
             className="font-inter text-sm green_gradient cursor-pointer"
-            onClick={handleEdit}
+            onClick={() => {
+              if (handleEdit) handleEdit(prompt);
+            }}
           >
             Edit
           </p>
           <p
             className="font-inter text-sm orange_gradient cursor-pointer"
-            onClick={handleDelete}
+            onClick={() => {
+              if (handleDelete) handleDelete(prompt);
+            }}
           >
             Delete
           </p>
