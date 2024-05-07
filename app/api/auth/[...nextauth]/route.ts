@@ -17,28 +17,28 @@ const handler = NextAuth({
         email: session.user?.email,
       });
 
-      if (session.user) {
+      if (sessionUser) {
         session.user.id = sessionUser._id.toString();
       }
 
       return session;
     },
-    async signIn({ profile }) {
+    async signIn({ user }) {
       try {
         // serverless -> Lambda === opens up only gets called
         await connectToDB();
 
         // check if a user already exists
         const userExists = await User.findOne({
-          email: profile?.email,
+          email: user?.email,
         });
 
         // if not, create a new user
         if (!userExists) {
           await User.create({
-            email: profile?.email,
-            username: profile?.name?.replace(" ", "").toLowerCase(),
-            image: profile?.image,
+            email: user?.email,
+            username: user?.name?.replace(" ", "").toLowerCase(),
+            image: user?.image,
           });
         }
 
