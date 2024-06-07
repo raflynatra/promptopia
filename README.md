@@ -13,7 +13,7 @@ Promptopia is a web application built with Next.js and TypeScript that allows us
 
 To get started with the development server, run:
 
-\`\`\`bash
+```bash
 npm run dev
 
 # or
@@ -27,19 +27,19 @@ pnpm dev
 # or
 
 bun dev
-\`\`\`
+```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result. The page auto-updates as you edit files.
 
 ## Project Structure
 
-- \`app\`: Main application directory
-- \`components\`: Reusable UI components
-- \`models\`: Data models and schemas
-- \`public\`: Public assets
-- \`styles\`: Global styles
-- \`types\`: TypeScript types
-- \`utils\`: Utility functions
+- `app`: Main application directory
+- `components`: Reusable UI components
+- `models`: Data models and schemas
+- `public`: Public assets
+- `styles`: Global styles
+- `types`: TypeScript types
+- `utils`: Utility functions
 
 ## Learn More
 
